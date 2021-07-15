@@ -4,8 +4,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.example.demo.domain.Categoria;
+import com.example.demo.domain.Cidade;
+import com.example.demo.domain.Estado;
 import com.example.demo.domain.Produto;
 import com.example.demo.repositories.CategoriaRepository;
+import com.example.demo.repositories.CidadeRepository;
+import com.example.demo.repositories.EstadoRepository;
 import com.example.demo.repositories.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,12 @@ public class NewtestApplication implements CommandLineRunner {
 	@Autowired
 	private ProdutoRepository produtoRepo;
 
+	@Autowired
+	private EstadoRepository estadoRepo;
+
+	@Autowired
+	private CidadeRepository cidadeRepo;
+
 	public static void main(String[] args) {
 		SpringApplication.run(NewtestApplication.class, args);
 	}
@@ -42,6 +52,9 @@ public class NewtestApplication implements CommandLineRunner {
 		Categoria cat2 = new Categoria(2, "Limpeza");
 		Produto p1 = new Produto(null, "Computador", 2000.0);
 		Produto p2 = new Produto(null, "Sabão", 5.0);
+
+		Estado est1 = new Estado(null, "Paraná");
+		Cidade cid1 = new Cidade(null, "Curitiba", est1);
 
 		cat1.getProdutos().add(p1);
 		cat1.getProdutos().add(p2);
@@ -62,6 +75,8 @@ public class NewtestApplication implements CommandLineRunner {
 
 		categoriaRepo.saveAll(list);
 		produtoRepo.saveAll(list2);
+		estadoRepo.save(est1);
+		cidadeRepo.save(cid1);
 
 	}
 
